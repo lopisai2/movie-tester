@@ -1,0 +1,84 @@
+.custom-basic-image-placeholder-container {
+    position: relative;
+    background-size: cover;
+    background-position: top;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-basic-image-placeholder-container>img {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-position: top;
+    object-fit: cover;
+    transition: opacity 0.3s ease-in-out;
+    will-change: opacity;
+
+}
+
+.custom-basic-image-placeholder-container>img.loaded {
+    opacity: 1;
+}
+
+.custom-basic-image-placeholder-container .placeholder-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1;
+    opacity: 1;
+}
+
+.custom-basic-image-placeholder-container:has(.loaded) .placeholder-image {
+    opacity: 0;
+    /* Transición suave al desaparecer */
+    pointer-events: none;
+    /* Ignorar interacciones cuando sea invisible */
+}
+
+@media screen and (max-width: 1024px) {
+
+    /*Mostrar la imagen móvil sin efecto de opacidad*/
+    .custom-basic-image-placeholder-container.no-opacity>img {
+        opacity: 1;
+        z-index: 2;
+    }
+
+
+}
+
+
+@media screen and (max-width: 768px) {
+    .custom-basic-image-placeholder-container .placeholder-image.desktop {
+        display: none;
+        /* Oculta la imagen de escritorio */
+    }
+
+    .custom-basic-image-placeholder-container .placeholder-image.mobile {
+        display: block;
+        /* Muestra la imagen móvil */
+        z-index: 2;
+    }
+
+    .custom-basic-image-placeholder-container.no-opacity .placeholder-image.mobile {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .custom-basic-image-placeholder-container .placeholder-image.mobile {
+        display: none;
+        /* Oculta la imagen móvil */
+    }
+
+    .custom-basic-image-placeholder-container .placeholder-image.desktop {
+        display: block;
+        /* Muestra la imagen de escritorio */
+        z-index: 2;
+    }
+}
