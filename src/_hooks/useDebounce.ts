@@ -3,6 +3,11 @@ import { useRef, useEffect, useCallback } from "react";
 
 type Callback = (args: { [key: string]: unknown }) => Promise<void>;
 
+/**
+ * Permite ejecutar una funcion despues de un tiempo de espera
+ * @param callback funcion a ser llamada
+ * @param delay cantidad en milisegundos de tiempo que debe esperar antes de llamar a la funcion
+ */
 export const useDebounce = (callback: Callback, delay: number) => {
   // Usar useRef para almacenar el último timeout id
   const timeoutRef = useRef<null | NodeJS.Timeout>(null);

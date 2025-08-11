@@ -3,7 +3,6 @@
 import CustomBasicAccordion from "@/_UI/Basic/CustomBasicAccordion/CustomBasicAccordion";
 import CustomRemoteSVG from "@/_UI/Basic/CustomRemoteSVG/CustomRemoteSVG";
 import { ArrowDownIcon2 } from "@/_assets/common/arrows/ArrowDownIcon2";
-import SocialApps from "@/_components/public/components/SocialApps/SocialApps";
 import useRedirectTo from "@/_hooks/useRedirectTo";
 import Link from "next/link";
 import { FC } from "react";
@@ -98,9 +97,7 @@ const FooterMobile: FC = ({}) => {
         ))}
       </div>
       {/* <div style={{marginBottom: 200}}/> */}
-      <div className='footer-mobile-final-list'>
-        <SocialApps flexDirection='row' buttonWidth='143px' width='auto' />
-
+      <div className='footer-mobile-final-list'>       
         <div className='footer-mobile-terms'>
           {[]?.map((item, index) => (
             <Link key={index} href={"/"}>

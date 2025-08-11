@@ -140,7 +140,7 @@
 
 .public-standard-btn-variant-3.navbar-buttons,
 .public-standard-btn.navbar-buttons {
-  width: 160px;
+  width: 200px;
 }
 
 @media screen and (min-width: 2038px) {
@@ -169,7 +169,7 @@
 
   .public-standard-btn-variant-3.navbar-buttons,
   .public-standard-btn.navbar-buttons {
-    width: 150px;
+    width: 200px;
   }
 
   .navbar-container .navbar-logo {

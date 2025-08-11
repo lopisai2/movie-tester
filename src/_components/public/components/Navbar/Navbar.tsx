@@ -1,89 +1,46 @@
 "use client";
-import { NODE_ENV } from "@/_config";
-if (NODE_ENV === "development") {
-  // Importar archivo solo en desarrollo
-  import("./styles.css");
-  import("./navbarDropdown.styles.css");
-}
+import "./styles.css";
+import "./navbarDropdown.styles.css";
+import movieTesterLight from "@/_assets/logos/movieTesterLight.png";
 import { StrapiFinalDataPage } from "@/_interfaces/StrapiData.interface";
 import { FC } from "react";
-import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
-import CustomRemoteSVG from "@/_UI/Basic/CustomRemoteSVG/CustomRemoteSVG";
-import ArrowDownIcon from "@/_assets/common/arrows/ArrowDownIcon";
-import CustomBasicDropdown from "@/_UI/Basic/CustomBasicDropdown/CustomBasicDropdown";
-import { useModalStore } from "@/_store/modal/modal";
-//import useRedirectTo from "@/_hooks/useRedirectTo";
 import Link from "next/link";
+import Image from "next/image";
+import SearchBar from "../SearchBar/SearchBar";
+import { ThemeToggle } from "@/_components/ThemeToggle";
 
 const Navbar: FC<{ navbarData: StrapiFinalDataPage | null }> = ({}) => {
-  const toggleDrawerModal = useModalStore((state) => state.toggleModal);
-
   return (
     <nav className='public-navbar-wrapper'>
       <div className='public-navbar-wrapper-top-gradient' />
       <div className='public-navbar-container'>
         <div className='navbar-container'>
-          <Link href={"/"} className='logo-container'></Link>
+          <Link href={"/"} className='logo-container'>
+            <Image
+              src={movieTesterLight.src}
+              alt='logo'
+              width={75}
+              height={75}
+              style={{
+                borderRadius: "50%",
+              }}
+            />
+          </Link>
           <div className='navbar-container-items'>
-            <ul className='navbar-container-items-list'>
-              {[{}]?.map((item, index) => (
-                <li key={index} className='navbar-item-active'>
-                  {[].length ? (
-                    <CustomBasicDropdown
-                      className='custom-dropdown-navlink'
-                      triggerClassName='custom-dropdown-navlink-trigger'
-                      wrapperClassName='custom-dropdown-navlink-dropdown'
-                      showOnHover
-                      dropdownChildren={
-                        <>
-                          {[
-                            ...[].map((item, index) => (
-                              <Link
-                                key={index}
-                                className='custom-dropdown-navlink-item'
-                                href={"/"}
-                              >
-                                <CustomRemoteSVG
-                                  defaultColors
-                                  width='20px'
-                                  height='20px'
-                                  url={""}
-                                />
-                                <span>NAVBAR</span>
-                              </Link>
-                            )),
-                          ]}
-                        </>
-                      }
-                    >
-                      <span className='custom-dropdown-navlink-trigger-text'>
-                        DROPDOWN NAVBAR
-                      </span>
-                      <ArrowDownIcon className='custom-dropdown-navlink-icon' />
-                    </CustomBasicDropdown>
-                  ) : (
-                    <Link href={"/"}>LINK NAVBAR</Link>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <SearchBar />
             <div className='navbar-container-items-buttons'>
-              {[]?.map((item, index) =>
+              {[{}]?.map((item, index) =>
                 true ? (
-                  <CustomBasicButton
+                  <Link
                     key={index}
-                    onClick={() => toggleDrawerModal("demoDrawer", true)}
-                    icon={
-                      true ? (
-                        <CustomRemoteSVG width='24px' height='24px' url={""} />
-                      ) : null
-                    }
+                    href={"/favorites"}
                     className={`${"public-standard-btn navbar-buttons"}`}
                   >
-                    BOTON
-                  </CustomBasicButton>
+                    Lista de visualización
+                  </Link>
                 ) : null
               )}
+              <ThemeToggle />
             </div>
           </div>
         </div>

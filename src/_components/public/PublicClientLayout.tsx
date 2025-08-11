@@ -1,24 +1,24 @@
+"use client";
 import NavbarWrapper from "./components/Navbar/NavbarWrapper";
 import Footer from "./components/Footer/Footer";
 import { FC, ReactNode } from "react";
-import { StrapiFinalDataPage } from "@/_interfaces/StrapiData.interface";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "../ThemeProvider";
 
 const PublicClientLayout: FC<{
   children: ReactNode;
-  navbarData: StrapiFinalDataPage | null;
-  footerData: StrapiFinalDataPage | null;
-  requestDemoDrawerData: StrapiFinalDataPage | null;
-  requestVisitDrawerData: StrapiFinalDataPage | null;
-  loginDrawerData: StrapiFinalDataPage | null;
-}> = ({ children, navbarData, footerData }) => {
+}> = ({ children }) => {
+  const queryClient = new QueryClient();
   return (
-    <>
-      <header className='public-header-container'>
-        <NavbarWrapper navbarData={navbarData} />
-      </header>
-      <>{children}</>
-      <Footer footerData={footerData} />
-    </>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <header className='public-header-container'>
+          <NavbarWrapper navbarData={null} />
+        </header>
+        <>{children}</>
+        <Footer footerData={null} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

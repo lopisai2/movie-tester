@@ -1,8 +1,9 @@
 "use client";
+import styles from "./styles.module.css";
 import ArrowUpIcon from "@/_assets/common/arrows/ArrowUpIcon";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 
-const ScrollToTopButton = () => {
+const ScrollToTopButton: FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -31,27 +32,9 @@ const ScrollToTopButton = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            padding: "8px",
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            backgroundColor: "var(--primary)",
-            color: "#fff",
-            border: "none",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            cursor: "pointer",
-            zIndex: 1000,
-            fontSize: "16px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          className={styles.publicScrollButton}
         >
-          <ArrowUpIcon width="24px" height="24px" />
+          <ArrowUpIcon width='24px' height='24px' />
         </button>
       )}
     </div>

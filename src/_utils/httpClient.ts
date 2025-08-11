@@ -1,4 +1,3 @@
-import { NODE_ENV } from "@/_config";
 import {
   ExtendedResponse,
   ResponseServiceData,
@@ -10,9 +9,13 @@ type HttpMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
 interface RequestConfig {
   method?: HttpMethod;
+  credentials?: "include" | "omit" | "same-origin";
   headers?: Record<string, string>;
+  params?: Record<string, string | number | boolean | undefined>;
+}
+
+interface RequestConfigFull extends RequestConfig {
   body?: unknown;
-  params?: Record<string, string | number>;
 }
 
 class HttpClient {
@@ -22,42 +25,74 @@ class HttpClient {
   constructor(baseURL: string, defaultHeaders: Record<string, string> = {}) {
     this.baseURL = baseURL;
     this.defaultHeaders = {
-      "Content-Type": "application/json",
       ...defaultHeaders,
     };
   }
 
   private buildUrl(
     url: string,
-    params?: Record<string, string | number>
-  ): string {
-    const queryString = params
-      ? "?" +
-        Object.entries(params)
-          .map(
-            ([key, val]) =>
-              `${encodeURIComponent(key)}=${encodeURIComponent(val)}`
-          )
-          .join("&")
-      : "";
+    params?: Record<string, string | number | boolean>
+  ): string {    
+    const queryString =
+      params && Object.keys(params).length
+        ? "?" +
+          Object.entries(params)
+            .map(
+              ([key, val]) =>
+                `${encodeURIComponent(key)}=${encodeURIComponent(val)}`
+            )
+            .join("&")
+        : "";
     return `${this.baseURL}${url}${queryString}`;
   }
 
   private async request<T>(
     url: string,
-    config: RequestConfig
+    config: RequestConfigFull
   ): Promise<ResponseServiceData<T>> {
-    const { method = "GET", headers = {}, body, params } = config;
-    const fullUrl = this.buildUrl(url, params);
+    const {
+      method = "GET",
+      headers = {},
+      body,
+      params,
+      credentials = "include",
+    } = config;
+
+    const filteredParams = Object.fromEntries(
+      Object.entries(params || {}).filter(([, value]) => value !== undefined)
+    ) as {
+      [key: string]: string | number;
+    };
+    const fullUrl = this.buildUrl(url, filteredParams);
+    
     try {
+      // Determina si `Content-Type` ya está definido
+      const hasContentType = Object.keys(headers).some(
+        (key) => key.toLowerCase() === "content-type"
+      );
+
+      // Si no se especifica `Content-Type`, asumimos que el cuerpo es JSON
+      const finalBody =
+        hasContentType && headers["Content-Type"]?.includes("application/json")
+          ? JSON.stringify(body)
+          : body instanceof FormData
+          ? body // Para FormData, dejamos el cuerpo intacto
+          : JSON.stringify(body);
+
+      // Si el cuerpo no es FormData y no se especifica `Content-Type`, asumimos JSON
+      if (!(finalBody instanceof FormData) && !headers["Content-Type"]) {
+        headers["Content-Type"] = "application/json";
+      }
+
       const response: ExtendedResponse<T> = await fetch(fullUrl, {
         method,
         headers: { ...this.defaultHeaders, ...headers },
-        body: body ? JSON.stringify(body) : undefined,
-        next: { revalidate: NODE_ENV === "production" ? 60 : 0 },
+        body: finalBody,
+        credentials, // Para recibir, por ejemplo, cookies del servidor
+        next: { revalidate: process.env.NODE_ENV === "production" ? 60 : 0 },
       });
 
-      // Guardamos el cuerpo parseado en `parsedBody` con `data` y opcionalmente `meta`
+      // Parseamos el cuerpo de la respuesta
       response.parsedBody = await response.json().catch(() => null);
 
       return verifyBodyResponse<T>({
@@ -72,13 +107,7 @@ class HttpClient {
     }
   }
 
-  public get<T>(
-    url: string,
-    config?: {
-      params?: Record<string, string | number>;
-      headers?: Record<string, string>;
-    }
-  ) {
+  public get<T>(url: string, config?: RequestConfig) {
     return this.request<T>(url, {
       method: "GET",
       headers: config?.headers,
@@ -86,50 +115,24 @@ class HttpClient {
     });
   }
 
-  public post<T>(
-    url: string,
-    body?: unknown,
-    config?: {
-      params?: Record<string, string | number>;
-      headers?: Record<string, string>;
-    }
-  ) {
+  public post<T>(url: string, body?: unknown, config?: RequestConfig) {
     return this.request<T>(url, {
       method: "POST",
       headers: config?.headers,
-      params: config?.params,
       body,
     });
   }
 
-  public put<T>(
-    url: string,
-    body?: unknown,
-    config?: {
-      params?: Record<string, string | number>;
-      headers?: Record<string, string>;
-    }
-  ) {
+  public put<T>(url: string, body?: unknown, config?: RequestConfig) {
     return this.request<T>(url, {
       method: "PUT",
-      body,
       headers: config?.headers,
-      params: config?.params,
+      body,
     });
   }
 
-  public delete<T>(
-    url: string,
-    config?: {
-      params?: Record<string, string | number>;
-      headers?: Record<string, string>;
-    }
-  ) {
-    return this.request<T>(url, {
-      method: "DELETE",
-      headers: config?.headers,
-      params: config?.params,
-    });
+  public delete<T>(url: string, config?: RequestConfig) {
+    return this.request<T>(url, { method: "DELETE", headers: config?.headers });
   }
 }
 

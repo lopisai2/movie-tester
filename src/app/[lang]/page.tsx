@@ -1,6 +1,8 @@
 import { MetaDataCommonProps } from "@/_interfaces/Metadata.interface";
+import { getMovies } from "@/_services/movies/GET/getMovies";
 //import HomePremiumExperience from "./_components/HomePremiumExperience/HomePremiumExperience";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const generateMetadata = async ({
   params,
@@ -54,10 +56,31 @@ export async function generateStaticParams() {
 }
 
 export default async function Home({}: MetaDataCommonProps) {
+  const [mainMovies, featuredMovies] = await Promise.all([
+    getMovies({
+      s: "Avengers",
+    }),
+    getMovies({
+      s: "Ace",
+    }),
+  ]);
   return (
     <>
-      <section className="public-section-wrapper">
-        <h1>Hola</h1>
+      <section className='public-section-wrapper'>
+        <h1>Movie Tester</h1>
+        {mainMovies.data?.Search?.map((movie, index) => (
+          <div key={index}>
+            <span>{movie.Title}</span>
+            <Link href={`/movie/${movie.imdbID}`}>Ver detalles</Link>
+          </div>
+        ))}
+
+        {featuredMovies.data?.Search?.map((movie, index) => (
+          <div key={index}>
+            <span>{movie.Title}</span>
+            <Link href={`/movie/${movie.imdbID}`}>Ver detalles</Link>
+          </div>
+        ))}
       </section>
     </>
   );

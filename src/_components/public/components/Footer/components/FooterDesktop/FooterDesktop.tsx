@@ -1,7 +1,6 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import CustomRemoteSVG from "@/_UI/Basic/CustomRemoteSVG/CustomRemoteSVG";
-import SocialApps from "@/_components/public/components/SocialApps/SocialApps";
 import useRedirectTo from "@/_hooks/useRedirectTo";
 import Link from "next/link";
 import { FC } from "react";
@@ -88,8 +87,7 @@ const FooterDesktop: FC = ({}) => {
         </div>
       </div>
       <div className='footer-final-list'>
-        <div className='footer-final-list-container'>
-          <SocialApps width='auto' />
+        <div className='footer-final-list-container'>          
           <div className='footer-terms'>
             {[]?.map((item, index) => (
               <span
