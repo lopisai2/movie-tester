@@ -2,12 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import { CustomBasicDrawerI } from "./interface";
 import useCustomBasicDrawer from "./hooks/useCustomBasicDrawer";
-import { NODE_ENV } from "@/_config";
-
-// Importar CSS de manera segura
-if (NODE_ENV === "development") {
-  import("./styles.css");
-}
+import "./styles.css";
 
 const CustomBasicDrawer = ({
   title,
@@ -73,28 +68,32 @@ const CustomBasicDrawer = ({
           }`}
           style={{ width }}
         >
-          <section ref={drawerRef} id="custom-basic-drawer" className="drawer-content">
-            <header className="drawer-header" style={customHeaderStyle}>
-              <div className="drawer-title">{title}</div>
-              {extra && <div className="drawer-extra">{extra}</div>}
+          <section
+            ref={drawerRef}
+            id='custom-basic-drawer'
+            className='drawer-content'
+          >
+            <header className='drawer-header' style={customHeaderStyle}>
+              <div className='drawer-title'>{title}</div>
+              {extra && <div className='drawer-extra'>{extra}</div>}
               {closable && (
                 <button
                   style={{
                     color: "#FFF",
                     textShadow: "0 0 6px #000",
                   }}
-                  aria-label="Close"
-                  className="drawer-close"
+                  aria-label='Close'
+                  className='drawer-close'
                   onClick={onClose}
                 >
                   {closeIcon || "✖"}
                 </button>
               )}
             </header>
-            <main className="drawer-body" style={customBodyStyle}>
+            <main className='drawer-body' style={customBodyStyle}>
               {children}
             </main>
-            {footer && <footer className="drawer-footer">{footer}</footer>}
+            {footer && <footer className='drawer-footer'>{footer}</footer>}
           </section>
         </aside>
       </>
