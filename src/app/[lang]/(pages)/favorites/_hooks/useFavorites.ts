@@ -1,7 +1,8 @@
+"use client";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const FAVORITES_STORAGE_KEY = "movie-tester-favorites";
-
 
 export const useFavorites = () => {
 
@@ -13,6 +14,7 @@ export const useFavorites = () => {
             localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(updatedFavoritesMovies));
             return updatedFavoritesMovies;
         })
+        toast("Pelicula eliminada de tus favoritos")
     }
 
     useEffect(() => {

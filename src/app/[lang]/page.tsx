@@ -1,8 +1,7 @@
 import { MetaDataCommonProps } from "@/_interfaces/Metadata.interface";
 import { getMovies } from "@/_services/movies/GET/getMovies";
-//import HomePremiumExperience from "./_components/HomePremiumExperience/HomePremiumExperience";
 import { Metadata } from "next";
-import Link from "next/link";
+import { MoviesHomeHero } from "./_components/MoviesHomeHero/MoviesHomeHero";
 
 export const generateMetadata = async ({
   params,
@@ -11,9 +10,9 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   //Obtener la metadata de la página desde strapi según el idioma
   return {
-    title: `Topia (${(await params).lang})`,
+    title: `Inicio | Movie Tester (${(await params).lang})`,
     description:
-      "Servicios para condominio, residenciales y centros comerciales.",
+      "Web de acceso libre para buscar peliculas y series facilmente.",
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon.ico",
@@ -23,30 +22,30 @@ export const generateMetadata = async ({
       type: "website",
       locale: "es_ES",
       url: "",
-      title: "Topia Web",
-      description: "Web de la gran Topia",
+      title: "Movie Tester Web",
+      description: "Movie Tester",
       images: [
         {
           url: "",
           width: 1200,
           height: 630,
-          alt: "Topia",
+          alt: "Movie Tester",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Topia Web",
-      description: "Web de la gran Topia",
+      title: "Movie Tester Web",
+      description: "Movie Tester",
       images: [
         {
           url: "",
           width: 1200,
           height: 630,
-          alt: "Topia",
+          alt: "Movie Tester",
         },
       ],
-      site: "@TopiaWeb",
+      site: "@MovieTester",
     },
   };
 };
@@ -67,20 +66,10 @@ export default async function Home({}: MetaDataCommonProps) {
   return (
     <>
       <section className='public-section-wrapper'>
-        <h1>Movie Tester</h1>
-        {mainMovies.data?.Search?.map((movie, index) => (
-          <div key={index}>
-            <span>{movie.Title}</span>
-            <Link href={`/movie/${movie.imdbID}`}>Ver detalles</Link>
-          </div>
-        ))}
-
-        {featuredMovies.data?.Search?.map((movie, index) => (
-          <div key={index}>
-            <span>{movie.Title}</span>
-            <Link href={`/movie/${movie.imdbID}`}>Ver detalles</Link>
-          </div>
-        ))}
+        <MoviesHomeHero
+          movies={mainMovies.data?.Search ?? []}
+          featuredMovies={featuredMovies.data?.Search ?? []}
+        />
       </section>
     </>
   );

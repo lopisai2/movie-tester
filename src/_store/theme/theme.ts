@@ -5,7 +5,6 @@ import { CustomThemeState, ThemeType } from "@/_interfaces/CustomTheme.interface
 
 const initialState = Object.freeze({
   tailwindTheme: localStorage.getItem('themeMode') === 'light' ? 'light' : 'dark',
-  mantineMode: localStorage.getItem('themeMode') === 'light' ? 'light' : 'dark',
 });
 
 export const useThemeStore = create<CustomThemeState>()(

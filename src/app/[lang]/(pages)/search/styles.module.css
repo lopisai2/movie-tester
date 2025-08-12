@@ -1,0 +1,78 @@
+.seachPageContainer {
+    margin-top: 48px;
+    min-height: 500px;
+    justify-content: flex-start;
+}
+
+.searchPageMovies {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 32px;
+}
+
+.searchPageMoviesFilters {
+    grid-column: 1;
+}
+
+.searchPageMoviesResults {
+    grid-column: 2/5;
+}
+
+.searchPageMoviesResultsList {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    overflow-y: auto;
+    height: 500px;
+}
+
+.searchPageMoviesResultsItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.searchPageMoviesResultsItemPoster {
+    min-width: 200px;
+    min-height: 300px;
+    max-height: 300px;
+    object-fit: contain;
+    position: relative;
+}
+
+@media screen and (max-width: 1024px) {
+    .searchPageMoviesResults {
+        grid-column: auto;
+    }
+
+    .searchPageMovies {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .searchPageMoviesFilters {
+        grid-column: auto;
+    }
+
+    .searchPageMoviesResults {
+        grid-column: auto;
+
+    }
+
+    .searchPageMoviesResultsList {
+        margin-top: 24px;
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+        height: auto;
+    }
+
+    .searchPageMoviesResultsItemPoster {
+        min-width: 100%;
+        min-height: 300px;
+        max-height: 300px;
+        object-fit: contain;
+        position: relative;
+    }
+
+}

@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV === "development") {
-  import("@/app/globals.css");
-}
+import "@/app/globals.css";
 import type { Metadata, Viewport } from "next";
 import { LayoutTransition } from "./layoutTransition";
 import PublicLayoutWrapper from "@/_components/public/PublicLayoutWrapper";
@@ -44,7 +42,7 @@ export default async function RootLayout({
   params: Promise<{ id: string; lang: string }>;
 }>) {
   return (
-    <html lang='es'>      
+    <html lang='es' suppressHydrationWarning>
       <body className={`antialiased public-container`}>
         <PublicLayoutWrapper params={await params}>
           <LayoutTransition

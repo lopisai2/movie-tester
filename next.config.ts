@@ -6,7 +6,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       new URL('https://m.media-amazon.com/**')
     ]
-  },
+  }, 
+  reactStrictMode: true,
+  compress: true,
+  trailingSlash: true,  
   experimental: {
     inlineCss: true,
   }

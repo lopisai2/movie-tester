@@ -1,11 +1,14 @@
 "use client";
 import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { FC, useState } from "react";
 import styles from "./styles.module.css";
+import { Input } from "@/_components/ui/input";
+import { SearchIcon } from "lucide-react";
 
 const SearchBar: FC = () => {
-  const [movieTerm, setMovieTerm] = useState("");
+  const searchParams = useSearchParams();
+  const [movieTerm, setMovieTerm] = useState(searchParams.get("q") || "");
   const router = useRouter();
 
   const handleSearchMovie = (e: React.FormEvent) => {
@@ -20,13 +23,18 @@ const SearchBar: FC = () => {
       className={styles.searcBarForm}
       onSubmit={handleSearchMovie}
     >
-      <input
-        type='text'
-        placeholder='Avengers, Batman...'
-        value={movieTerm}
-        onChange={(e) => setMovieTerm(e.target.value)}
-      />
-      <CustomBasicButton>Buscar</CustomBasicButton>
+      <div className={styles.searchInputContainer}>
+        <Input
+          type='text'
+          placeholder='Buscar Avengers, Batman...'
+          className={`${styles.searchInput} bg-white dark:bg-[#252525]`}
+          value={movieTerm}
+          onChange={(e) => setMovieTerm(e.target.value)}
+        />
+        <CustomBasicButton className={styles.searcBarButton}>
+          <SearchIcon />
+        </CustomBasicButton>
+      </div>
     </form>
   );
 };

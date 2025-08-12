@@ -3,9 +3,9 @@ import { getMovie } from "@/_services/movies/GET/getMovie";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
-    const { id } = params;
+    const { id } = await params;
     if (!API_URL) return NextResponse.json({ message: "API_URL no definida" }, { status: 500 })
 
     const movieData = await getMovie({

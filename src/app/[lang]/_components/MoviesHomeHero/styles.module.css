@@ -1,0 +1,87 @@
+.movieHomeCarouselSection {    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.movieHomeCarousel {
+    width: 100%;
+    grid-column: 1/3;
+}
+
+.movieHomeCarouselTitle {
+    grid-column: 1/3;
+}
+
+.movieHomeFeaturedTitle {
+    grid-column-start: 4;
+}
+
+.movieHomeFeaturedSection {
+    grid-column: 4;
+}
+
+.movieCarouselItem {
+    position: relative;
+    height: 500px;
+    padding-left: 0;
+}
+
+.movieCarouselItemImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.movieHomeFeaturedList {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.movieHomeFeaturedItem {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.movieHomeFeaturedLink {
+    color: var(--primary);
+}
+
+.movieHomeFeaturePoster {
+    min-width: 100px;
+    max-width: 100px;
+    position: relative;
+}
+
+.movieHomeFeatureBookMark {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+@media screen and (max-width: 1024px) {
+    .movieHomeCarouselSection {
+        grid-template-columns: 1fr;
+    }
+
+    .movieHomeCarousel {
+        width: 100%;
+        grid-column: auto;
+    }
+
+    .movieHomeCarouselTitle {
+        grid-column: auto;
+    }
+
+    .movieHomeFeaturedTitle {
+        margin-top: 24px;
+        grid-column-start: auto;
+    }
+
+    .movieHomeFeaturedSection {
+        grid-column: auto;
+    }
+}

@@ -27,7 +27,7 @@ const FooterDesktop: FC = ({}) => {
           <div className='footer-main-list-social-networks'>
             <p>FOOTER</p>
             <div className='footer-main-list-social-networks-items'>
-              {[]?.map((item, index) => (
+              {[{}]?.map((item, index) => (
                 <Link href={"#"} target='_blank' key={index}>
                   <div className='footer-main-list-social-networks-item'>
                     <CustomRemoteSVG
@@ -44,7 +44,7 @@ const FooterDesktop: FC = ({}) => {
           </div>
         </div>
         <div className='footer-main-list-sublists'>
-          {[]?.map((item, index) => (
+          {[{}]?.map((item, index) => (
             <div className='footer-main-list-sublists-item' key={index}>
               <span style={{ marginBottom: 17 }}>FOOTER SUBLIST</span>
               <ul
@@ -85,40 +85,7 @@ const FooterDesktop: FC = ({}) => {
             </div>
           ))}
         </div>
-      </div>
-      <div className='footer-final-list'>
-        <div className='footer-final-list-container'>          
-          <div className='footer-terms'>
-            {[]?.map((item, index) => (
-              <span
-                style={{ borderRightWidth: index === 0 ? 0 : 1 }}
-                key={index}
-                className='footer-mail-link'
-              >
-                <Link
-                  style={{
-                    color: "var(--secondaryPlus4)",
-                  }}
-                  href={"#"}
-                  target='_blank'
-                >
-                  FOOTER FINAL LINK
-                </Link>
-              </span>
-            ))}
-          </div>
-          <div>
-            <Link href={"#"} target='_blank'>
-              <CustomRemoteSVG
-                defaultColors
-                width='101px'
-                height='24px'
-                url={""}
-              />
-            </Link>
-          </div>
-        </div>
-      </div>
+      </div>     
     </section>
   );
 };

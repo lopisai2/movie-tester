@@ -1,72 +1,59 @@
-"use client";
-import { useSearchParams } from "next/navigation";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getMoviesClient } from "./_services/GET/getMoviesClient";
-import Link from "next/link";
-import { useCustomBasicList } from "@/_hooks/useCustomBasicList";
-import { MovieResultI } from "@/_interfaces/movies/Movie.interface";
+import SearchPageClient from "./SearchPageClient";
+import { Metadata } from "next";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> => {
+  //Obtener la metadata de la página desde strapi según el idioma
+  return {
+    title: `Resultados de la búsqueda | Movie Tester (${(await params).lang})`,
+    description:
+      "Web de acceso libre para buscar peliculas y series facilmente.",
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+      apple: "/favicon.ico",
+    },
+    openGraph: {
+      type: "website",
+      locale: "es_ES",
+      url: "",
+      title: "Movie Tester Web",
+      description: "Movie Tester",
+      images: [
+        {
+          url: "",
+          width: 1200,
+          height: 630,
+          alt: "Movie Tester",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Movie Tester Web",
+      description: "Movie Tester",
+      images: [
+        {
+          url: "",
+          width: 1200,
+          height: 630,
+          alt: "Movie Tester",
+        },
+      ],
+      site: "@MovieTester",
+    },
+  };
+};
+
+export async function generateStaticParams() {
+  return [{ lang: "es" }, { lang: "en" }];
+}
 
 const SearchPage = () => {
-  const params = useSearchParams();
-  const query = params.get("q") ?? "";
-
-  const {
-    data: moviesData,
-    fetchNextPage,
-    hasNextPage,
-    isLoading,
-    error,
-  } = useInfiniteQuery({
-    queryKey: ["search", query],
-    initialPageParam: 1,
-    queryFn: async ({ pageParam = 1 }) => {
-      const res = await getMoviesClient({
-        searchTerm: query,
-        page: pageParam,
-      });
-      return res;
-    },
-    getNextPageParam: (data, pages) => {
-      const totalItems = parseInt(data?.totalResults || "0", 10);
-      if (pages.length * 10 < totalItems) return pages.length + 1;
-      return undefined;
-    },
-    enabled: !!query,
-  });
-
-  const { sentinelRef } = useCustomBasicList<MovieResultI>({
-    hasMore: hasNextPage,
-    loading: isLoading,
-    loadMoreData: fetchNextPage,
-  });
-
-  return (
-    <section className='public-section-wrapper'>
-      {error ? (
-        <div>
-          <span>Error: {error.message}</span>
-        </div>
-      ) : (
-        <ul
-          style={{
-            maxHeight: "250px",
-            overflowY: "auto",
-          }}
-        >
-          {moviesData?.pages.map((page) =>
-            page?.Search.map((movie, index) => (
-              <div key={index}>
-                <span>{movie.Title}</span>
-                <Link href={`/movie/${movie.imdbID}`}>Ver detalles</Link>
-              </div>
-            ))
-          )}
-          {isLoading && <div>Cargando...</div>}
-          <div ref={sentinelRef} />
-        </ul>
-      )}
-    </section>
-  );
+  return <SearchPageClient />;
 };
 
 export default SearchPage;

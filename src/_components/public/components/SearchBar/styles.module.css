@@ -1,5 +1,25 @@
-.searcBarForm{
+.searcBarForm {
     display: flex;
     align-items: center;
     gap: 8px;
+    width: 100%;
+}
+
+.searchInputContainer {
+    display: flex;
+    align-items: center;
+    position: relative;        
+    width: 80%;
+}
+
+.searchInput{
+
+    height: 40px;
+}
+
+.searcBarButton {
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+    top: 6px;
 }

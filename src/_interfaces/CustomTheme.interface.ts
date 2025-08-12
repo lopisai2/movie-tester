@@ -2,8 +2,7 @@
 export type ThemeType = "light" | "dark";
 
 export interface CustomThemeInterface {
-  tailwindTheme: ThemeType;
-  mantineMode: ThemeType
+  tailwindTheme: ThemeType;  
 }
 
 export interface CustomThemeState {

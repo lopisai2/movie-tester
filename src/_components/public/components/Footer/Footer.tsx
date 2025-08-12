@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV === "development") {
-  import("./styles.css");
-}
+import "./styles.css";
 import { FC } from "react";
 import { StrapiFinalDataPage } from "@/_interfaces/StrapiData.interface";
 import FooterDesktop from "./components/FooterDesktop/FooterDesktop";

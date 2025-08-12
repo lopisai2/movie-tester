@@ -1,0 +1,33 @@
+.movieDetalContainer {    
+    display: flex;
+    flex-direction: row;    
+    gap: 32px;
+}
+
+.movieDetailInfo {
+    width: calc(100% - 400px);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-self: flex-start;
+}
+
+.movieDetailTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+@media screen and (max-width: 1024px) {
+    .movieDetalContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .movieDetailInfo {
+        width: 100%;
+        align-self: center;
+    }
+}

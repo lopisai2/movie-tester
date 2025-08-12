@@ -25,8 +25,8 @@ const MobileNavbar: FC<{
           <Image
             src={movieTesterLight.src}
             alt='logo'
-            width={130}
-            height={100}
+            width={65}
+            height={65}
             style={{
               borderRadius: "50%",
             }}

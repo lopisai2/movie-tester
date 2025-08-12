@@ -1,50 +1,59 @@
-"use client";
-import { useQueries } from "@tanstack/react-query";
-import { useFavorites } from "./_hooks/useFavorites";
-import { getMovieClient } from "./_services/GET/getMovieClient";
-import Link from "next/link";
+import { Metadata } from "next";
+import FavoritesPageClient from "./FavoritesPageClient";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> => {
+  //Obtener la metadata de la página desde strapi según el idioma
+  return {
+    title: `Favoritos | Movie Tester (${(await params).lang})`,
+    description:
+      "Web de acceso libre para buscar peliculas y series facilmente.",
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+      apple: "/favicon.ico",
+    },
+    openGraph: {
+      type: "website",
+      locale: "es_ES",
+      url: "",
+      title: "Movie Tester Web",
+      description: "Movie Tester",
+      images: [
+        {
+          url: "",
+          width: 1200,
+          height: 630,
+          alt: "Movie Tester",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Movie Tester Web",
+      description: "Movie Tester",
+      images: [
+        {
+          url: "",
+          width: 1200,
+          height: 630,
+          alt: "Movie Tester",
+        },
+      ],
+      site: "@MovieTester",
+    },
+  };
+};
+
+export async function generateStaticParams() {
+  return [{ lang: "es" }, { lang: "en" }];
+}
 
 const FavoritesPage = () => {
-  const { favoritesMovies, removeFavoriteMovie } = useFavorites();
-
-  const favoritesMoviesData = useQueries({
-    queries: favoritesMovies.map((movieId) => ({
-      queryKey: ["movie", movieId],
-      queryFn: async () => {
-        const res = await getMovieClient(movieId);
-        return res;
-      },
-      enabled: !!movieId,
-    })),
-  });
-  const isLoading = favoritesMoviesData.some(
-    (movieData) => movieData.isLoading
-  );
-  const isError = favoritesMoviesData.some((movieData) => movieData.isError);
-  return (
-    <section className='public-section-wrapper'>
-      <h1>Favoritos</h1>
-      <ul>
-        {favoritesMoviesData.map((movieData, index) =>
-          movieData.data ? (
-            <li key={index}>
-              {movieData?.data?.Title}
-              <Link href={`/movie/${movieData?.data?.imdbID}`}>
-                Ver detalles
-              </Link>
-              <button
-                onClick={() =>
-                  removeFavoriteMovie(movieData?.data?.imdbID ?? "")
-                }
-              >
-                Eliminar
-              </button>
-            </li>
-          ) : null
-        )}
-      </ul>
-    </section>
-  );
+  return <FavoritesPageClient />;
 };
 
 export default FavoritesPage;

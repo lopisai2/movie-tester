@@ -1,18 +1,17 @@
 "use client";
 import "./styles.css";
-import "./navbarDropdown.styles.css";
 import movieTesterLight from "@/_assets/logos/movieTesterLight.png";
 import { StrapiFinalDataPage } from "@/_interfaces/StrapiData.interface";
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SearchBar from "../SearchBar/SearchBar";
 import { ThemeToggle } from "@/_components/ThemeToggle";
+import { BookmarkCheck } from "lucide-react";
 
 const Navbar: FC<{ navbarData: StrapiFinalDataPage | null }> = ({}) => {
   return (
     <nav className='public-navbar-wrapper'>
-      <div className='public-navbar-wrapper-top-gradient' />
       <div className='public-navbar-container'>
         <div className='navbar-container'>
           <Link href={"/"} className='logo-container'>
@@ -27,7 +26,9 @@ const Navbar: FC<{ navbarData: StrapiFinalDataPage | null }> = ({}) => {
             />
           </Link>
           <div className='navbar-container-items'>
-            <SearchBar />
+            <Suspense>
+              <SearchBar />
+            </Suspense>
             <div className='navbar-container-items-buttons'>
               {[{}]?.map((item, index) =>
                 true ? (
@@ -35,8 +36,10 @@ const Navbar: FC<{ navbarData: StrapiFinalDataPage | null }> = ({}) => {
                     key={index}
                     href={"/favorites"}
                     className={`${"public-standard-btn navbar-buttons"}`}
+                    style={{ width: "150px" }}
                   >
-                    Lista de visualización
+                    <BookmarkCheck />
+                    Favoritos
                   </Link>
                 ) : null
               )}

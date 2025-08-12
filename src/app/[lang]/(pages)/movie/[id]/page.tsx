@@ -1,7 +1,6 @@
 import { MetaDataCommonProps } from "@/_interfaces/Metadata.interface";
 import { getMovie } from "@/_services/movies/GET/getMovie";
 import { Metadata } from "next";
-import Image from "next/image";
 import MovieDetail from "./_components/MovieDetail";
 
 export const generateMetadata = async ({
@@ -60,7 +59,7 @@ export default async function MoviePage({ params }: MetaDataCommonProps) {
 
   return (
     <>
-      <section>
+      <section className="public-section-wrapper">
         <MovieDetail movieData={data} />
       </section>
     </>
