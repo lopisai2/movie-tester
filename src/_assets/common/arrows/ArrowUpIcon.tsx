@@ -6,8 +6,8 @@ export const ArrowUpIcon: FC<SVGCommonProps> = ({
   width = "28px",
   height = "28px",
   masterFill = "none",
-  fill = "var(--white)",
-  stroke = "var(--white)",
+  fill = "#FFF",
+  stroke = "#FFF",
   style,
 }) => {
   return (

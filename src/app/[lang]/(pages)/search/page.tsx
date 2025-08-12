@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import SearchPageClient from "./SearchPageClient";
 import { Metadata } from "next";
 
@@ -53,7 +54,11 @@ export async function generateStaticParams() {
 }
 
 const SearchPage = () => {
-  return <SearchPageClient />;
+  return (
+    <Suspense>
+      <SearchPageClient />
+    </Suspense>
+  );
 };
 
 export default SearchPage;

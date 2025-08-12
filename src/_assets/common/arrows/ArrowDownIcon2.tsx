@@ -6,7 +6,7 @@ export const ArrowDownIcon2: FC<SVGCommonProps> = ({
   width = "16px",
   height = "16px",
   masterFill = "none",
-  fill = "var(--white)",
+  fill = "#FFF",
 }) => {
   return (
     <svg

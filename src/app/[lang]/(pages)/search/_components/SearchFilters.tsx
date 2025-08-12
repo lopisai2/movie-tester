@@ -27,7 +27,11 @@ const SearchFilters: FC<SearchFiltersI> = ({
 
   const handleValidateYearInput = (value: string) => {
     if (value.length !== 0 && value.length !== 4) {
-      setYearInputError("Año inválido");
+      setYearInputError("Año con formato incorrecto");
+      return;
+    }
+    if (parseInt(value) < 1900 || parseInt(value) > new Date().getFullYear()) {
+      setYearInputError("Año fuera de limite");
       return;
     }
     setYearInputError("");

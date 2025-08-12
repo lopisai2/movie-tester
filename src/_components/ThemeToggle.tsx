@@ -28,7 +28,7 @@ export const ThemeToggle: React.FC = () => {
           <span className='sr-only'>Cambiar tema</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
+      <DropdownMenuContent align='end' className="z-[1500]">
         <DropdownMenuItem onClick={() => setTheme("light")}>
           Claro
         </DropdownMenuItem>

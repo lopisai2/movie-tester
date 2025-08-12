@@ -3,21 +3,19 @@ import CloseIcon from "@/_assets/common/shapes/CloseIcon";
 import { Dispatch, FC, SetStateAction } from "react";
 import ListMenuItems from "./ListMenuItems";
 import CustomDrawer from "@/_UI/Basic/CustomBasicDrawer/CustomBasicDrawer";
-import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
-import UserIcon from "@/_assets/common/avatar/UserIcon";
 import { useModalStore } from "@/_store/modal/modal";
 import CustomRemoteSVG from "@/_UI/Basic/CustomRemoteSVG/CustomRemoteSVG";
+import { ThemeToggle } from "@/_components/ThemeToggle";
+import Image from "next/image";
+import movieTesterLight from "@/_assets/logos/movieTesterLight.png";
 
-export interface DrawerMenuI {  
+export interface DrawerMenuI {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   handleRedirectTo: (url: string | -1, forceBack?: boolean) => void;
 }
 
-const DrawerMenu: FC<DrawerMenuI> = ({  
-  isOpen,
-  setIsOpen,
-}) => {
+const DrawerMenu: FC<DrawerMenuI> = ({ isOpen, setIsOpen }) => {
   const toggleModal = useModalStore((state) => state.toggleModal);
 
   const handleOpenLoginDemoModal = (
@@ -33,8 +31,18 @@ const DrawerMenu: FC<DrawerMenuI> = ({
       placement='left'
       open={isOpen}
       onClose={() => setIsOpen(false)}
-      closeIcon={<CloseIcon fill='#FFF' />}
+      closeIcon={<CloseIcon  />}
     >
+      <Image
+        src={movieTesterLight.src}
+        alt='logo'
+        width={65}
+        height={65}
+        style={{
+          borderRadius: "50%",
+        }}
+        className='navbar-mobile-logo-container'
+      />
       <ListMenuItems
         handleOpenLoginDemoModal={handleOpenLoginDemoModal}
         setIsOpen={setIsOpen}
@@ -54,14 +62,10 @@ const DrawerMenu: FC<DrawerMenuI> = ({
         ))}
       </div>
       <div className='mobile-drawer-separator' />
-      <CustomBasicButton
-        onClick={() => handleOpenLoginDemoModal("loginDrawer")}
-        style={{ margin: "24px 0" }}
-        icon={<UserIcon fill='var(--white)' width='40px' height='40px' />}
-        className='mobile-navbar-login-button'
-      >
-        HOLA
-      </CustomBasicButton>
+      <div className="flex flex-row gap-2 items-center">
+        <span>Tema:</span>
+        <ThemeToggle />
+      </div>
     </CustomDrawer>
   );
 };

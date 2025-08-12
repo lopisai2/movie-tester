@@ -6,7 +6,7 @@ export const HamburgerMenuIcon: FC<SVGCommonProps> = ({
   width = "32px",
   height = "32px",
   masterFill = "none",
-  fill = "var(--white)",
+  fill = "#FFF",
 }) => {
   return (
     <svg

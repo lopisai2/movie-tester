@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import CustomBasicAccordion from "@/_UI/Basic/CustomBasicAccordion/CustomBasicAccordion";
 import CustomRemoteSVG from "@/_UI/Basic/CustomRemoteSVG/CustomRemoteSVG";
@@ -6,6 +5,7 @@ import { ArrowDownIcon2 } from "@/_assets/common/arrows/ArrowDownIcon2";
 import useRedirectTo from "@/_hooks/useRedirectTo";
 import Link from "next/link";
 import { FC } from "react";
+import { footerData } from "../../contants/footerData";
 
 const FooterMobile: FC = ({}) => {
   const { handleRedirectTo } = useRedirectTo();
@@ -19,12 +19,12 @@ const FooterMobile: FC = ({}) => {
   const order = [0, 3, 1, 4, 2];
 
   const acccordionItems =
-    []
+    footerData
       .map((item, index) => ({
-        label: "item accordion",
+        label: item.title,
         content: (
           <ul>
-            {[]?.map((subitem, subindex) => (
+            {item.links?.map((subitem, subindex) => (
               <li
                 onClick={() =>
                   handleFooterLinkClick({
@@ -34,7 +34,7 @@ const FooterMobile: FC = ({}) => {
                 }
                 key={subindex}
               >
-                FOOTER ACCORDION ITEM
+                {subitem.label}
               </li>
             ))}
           </ul>
@@ -49,30 +49,6 @@ const FooterMobile: FC = ({}) => {
 
   return (
     <section className='footer-container footer-mobile'>
-      <div className='footer-mobile-logo-social-container'>
-        <img
-          fetchPriority='low'
-          decoding='async'
-          className='mt-8 mb-1'
-          src={""}
-          alt='icon'
-        />
-        <div className='footer-mobile-main-list-social-networks'>
-          {[]?.map((item, index) => (
-            <div key={index} className='footer-main-list-social-networks-item'>
-              <Link href={"#"} target='_blank'>
-                <CustomRemoteSVG
-                  fill='var(--white)'
-                  stroke='var(--white)'
-                  width='28px'
-                  height='28px'
-                  url={""}
-                />
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
       <div className='footer-mobile-main-list'>
         <CustomBasicAccordion
           CloseIcon={CloseIcon}
@@ -82,7 +58,7 @@ const FooterMobile: FC = ({}) => {
         />
       </div>
       <div className='footer-mobile-main-list-sublists-item-contact-wrapper'>
-        {[].map((item, index) => (
+        {[{}].map((item, index) => (
           <div key={index} className='footer-main-list-sublists-item-contact'>
             <CustomRemoteSVG
               fill='var(--white)'
@@ -92,30 +68,9 @@ const FooterMobile: FC = ({}) => {
               height='22px'
               url={""}
             />
-            <Link href={"/"}>FOOTER CONTACT LINK</Link>
+            <Link href={"/"}>MOVIE TESTER {new Date().getFullYear()}</Link>
           </div>
         ))}
-      </div>
-      {/* <div style={{marginBottom: 200}}/> */}
-      <div className='footer-mobile-final-list'>       
-        <div className='footer-mobile-terms'>
-          {[]?.map((item, index) => (
-            <Link key={index} href={"/"}>
-              <span className='footer-mail-link'>FOOTER TERMS LINK</span>
-            </Link>
-          ))}
-        </div>
-
-        <div style={{ marginTop: 30, textAlign: "center" }}>
-          <Link href={"#"} target='_blank'>
-            <CustomRemoteSVG
-              defaultColors
-              width='92.56px'
-              height='24px'
-              url={""}
-            />
-          </Link>
-        </div>
       </div>
     </section>
   );

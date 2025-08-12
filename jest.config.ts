@@ -5,8 +5,10 @@ const config: Config.InitialOptions = {
     testEnvironment: "jsdom",
     moduleNameMapper: {
         '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+        "^@/(.*)$": "<rootDir>/src/$1"
     },
     setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+
 }
 
 export default config;
