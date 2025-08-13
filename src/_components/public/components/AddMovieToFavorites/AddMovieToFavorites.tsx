@@ -15,8 +15,14 @@ const AddMovieToFavorites: FC<{
   const addRemoveFavorites = useFavoritesStore(
     (state) => state.addRemoveFavorites
   );
+
   return (
     <CustomBasicButton
+      aria-label={
+        currentFavorites.includes(movieId)
+          ? "Eliminar de favoritos"
+          : "Añadir a favoritos"
+      }
       onClick={() => addRemoveFavorites(movieId)}
       className={`${styles.addMovieToFavoritesButton} ${className ?? ""}`}
     >
@@ -24,12 +30,14 @@ const AddMovieToFavorites: FC<{
         <BookmarkCheck
           width={width}
           height={height}
+          aria-hidden='true'
           className='text-black dark:text-white'
         />
       ) : (
         <Bookmark
           width={width}
           height={height}
+          aria-hidden='true'
           className='text-black dark:text-white'
         />
       )}
@@ -37,4 +45,5 @@ const AddMovieToFavorites: FC<{
   );
 };
 
+AddMovieToFavorites.displayName = "AddMovieToFavorites";
 export default AddMovieToFavorites;

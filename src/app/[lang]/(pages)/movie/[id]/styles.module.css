@@ -1,4 +1,4 @@
-.movieDetalContainer {    
+.movieDetalContainer {
     display: flex;
     flex-direction: row !important;
     gap: 32px;
@@ -10,6 +10,18 @@
     flex-direction: column;
     height: 100%;
     align-self: flex-start;
+}
+
+.movieDetailInfo dt {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;    
+}
+
+.movieDetailInfo dd {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;    
 }
 
 .movieDetailTitle {

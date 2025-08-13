@@ -12,7 +12,6 @@ import { FC } from "react";
 
 export const ThemeToggle: FC = () => {
   const changeThemeMode = useThemeStore((state) => state.changeThemeMode);
-
   const handleChangeTheme = (theme: "light" | "dark") => {
     changeThemeMode(theme);
   };

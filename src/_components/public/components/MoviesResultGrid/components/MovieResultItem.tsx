@@ -1,10 +1,11 @@
 import React, { FC } from "react";
 import styles from "../styles.module.css";
-import { BookmarkMinus, Link } from "lucide-react";
+import { BookmarkMinus } from "lucide-react";
 import Image from "next/image";
 import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
 import { MovieResultI } from "@/_interfaces/movies/Movie.interface";
 import noImageAvailable from "@/_assets/noImageAvailable.jpg";
+import Link from "next/link";
 
 const MovieResultItem: FC<{
   movie: MovieResultI;

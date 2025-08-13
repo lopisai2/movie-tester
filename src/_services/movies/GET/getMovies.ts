@@ -38,7 +38,7 @@ export const getMovies = async ({
 
     return {
         data: {
-            totalResults: moviesData.totalResults ?? "0",
+            totalResults: moviesData?.totalResults ?? "0",
             Search: mappedSearchData,
         },
         success: res.success,

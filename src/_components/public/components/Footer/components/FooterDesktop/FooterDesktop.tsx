@@ -22,9 +22,10 @@ const FooterDesktop: FC = ({}) => {
                   gap: 6,
                 }}
                 className='footer-main-list-sublists-item-sublist-container'
+                role='list'
               >
                 {item.links?.map((subitem, subindex) => (
-                  <li key={subindex}>
+                  <li role='listitem' key={subindex}>
                     {
                       <Link
                         onClick={(e) => {

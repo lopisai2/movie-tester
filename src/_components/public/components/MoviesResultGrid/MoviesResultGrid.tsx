@@ -16,12 +16,12 @@ const MoviesResultGrid: FC<MoviesResultGridI> = ({
   return (
     <>
       {error ? (
-        <section
+        <div
           role='alert'
           className='col-start-1 col-end-5 flex flex-col items-center justify-center h-[300px]'
         >
           <span>Ocurrió un error: {error?.message}</span>
-        </section>
+        </div>
       ) : (
         <ul
           role='list'
@@ -45,5 +45,7 @@ const MoviesResultGrid: FC<MoviesResultGridI> = ({
     </>
   );
 };
+
+MoviesResultGrid.displayName = "MoviesResultGrid";
 
 export default MoviesResultGrid;

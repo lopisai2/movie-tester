@@ -1,30 +1,14 @@
 "use client";
 import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import styles from "./styles.module.css";
 import { Input } from "@/_components/ui/input";
 import { SearchIcon } from "lucide-react";
+import { useSearchBar } from "./hooks/useSearchBar";
 
 const SearchBar: FC = () => {
-  const searchParams = useSearchParams();
-  const [searchInputError, setSearchInputError] = useState("");
-  const [movieTerm, setMovieTerm] = useState("");
-  const router = useRouter();
-
-  const handleSearchMovie = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!movieTerm || !movieTerm.trim()) return;
-    if (movieTerm.length < 3)
-      return setSearchInputError("La busqueda debe tener al menos 3 letras");
-    setSearchInputError("");
-    router.push(`/search?q=${encodeURIComponent(movieTerm)}`);
-  };
-
-  useEffect(() => {
-    const q = searchParams.get("q");
-    if (q) setMovieTerm(q);
-  }, [searchParams]);
+  const { movieTerm, searchInputError, handleSearchMovie, setMovieTerm } =
+    useSearchBar();
 
   return (
     <form
@@ -35,7 +19,8 @@ const SearchBar: FC = () => {
       }`}
       onSubmit={handleSearchMovie}
     >
-      <div className={styles.searchInputContainer}>
+      <fieldset className={styles.searchInputContainer}>
+        <legend className="sr-only">Buscar</legend>
         <Input
           type='text'
           placeholder='Buscar Avengers, Batman...'
@@ -46,7 +31,7 @@ const SearchBar: FC = () => {
         <CustomBasicButton className={styles.searcBarButton}>
           <SearchIcon />
         </CustomBasicButton>
-      </div>
+      </fieldset>
       {searchInputError && (
         <span
           className='max-lg:mt-3'

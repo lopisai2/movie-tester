@@ -1,6 +1,5 @@
 "use client";
 import CustomBasicAccordion from "@/_UI/Basic/CustomBasicAccordion/CustomBasicAccordion";
-import CustomRemoteSVG from "@/_UI/Basic/CustomRemoteSVG/CustomRemoteSVG";
 import { ArrowDownIcon2 } from "@/_assets/common/arrows/ArrowDownIcon2";
 import useRedirectTo from "@/_hooks/useRedirectTo";
 import Link from "next/link";
@@ -50,15 +49,7 @@ const FooterMobile: FC = ({}) => {
       </article>
       <div className='footer-mobile-main-list-sublists-item-contact-wrapper'>
         {[{}].map((item, index) => (
-          <div key={index} className='footer-main-list-sublists-item-contact'>
-            <CustomRemoteSVG
-              fill='var(--white)'
-              stroke='var(--white)'
-              secondaryFill='var(--white)'
-              width='22px'
-              height='22px'
-              url={""}
-            />
+          <div key={index} className='footer-main-list-sublists-item-contact'>            
             <Link href={"/"}>MOVIE TESTER {new Date().getFullYear()}</Link>
           </div>
         ))}

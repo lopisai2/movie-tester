@@ -1,7 +1,7 @@
 "use client";
 import styles from "./styles.module.css";
 import { useSearch } from "./_hooks/useSearch";
-import SearchFilters from "./_components/SearchFilters";
+import SearchFilters from "./_components/SearchFilters/SearchFilters";
 import MoviesResultGrid from "@/_components/public/components/MoviesResultGrid/MoviesResultGrid";
 
 const SearchPageClient = () => {
@@ -32,7 +32,7 @@ const SearchPageClient = () => {
             movieFilters={movieFilters}
             handleUpdateFilters={handleUpdateFilters}
           />
-          <div className={styles.searchPageMoviesResults}>
+          <section className={styles.searchPageMoviesResults}>
             <MoviesResultGrid
               error={error}
               hasNextPage={hasNextPage}
@@ -40,7 +40,7 @@ const SearchPageClient = () => {
               sentinelRef={sentinelRef}
               moviesData={moviesData?.pages.flatMap((page) => page?.Search)}
             />
-          </div>
+          </section>
         </div>
       </div>
     </section>

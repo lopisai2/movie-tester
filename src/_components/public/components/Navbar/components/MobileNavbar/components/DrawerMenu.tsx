@@ -4,7 +4,6 @@ import { Dispatch, FC, SetStateAction } from "react";
 import ListMenuItems from "./ListMenuItems";
 import CustomDrawer from "@/_UI/Basic/CustomBasicDrawer/CustomBasicDrawer";
 import { useModalStore } from "@/_store/modal/modal";
-import CustomRemoteSVG from "@/_UI/Basic/CustomRemoteSVG/CustomRemoteSVG";
 import { ThemeToggle } from "@/_components/ThemeToggle";
 import Image from "next/image";
 import movieTesterLight from "@/_assets/logos/movieTesterLight.png";
@@ -37,6 +36,7 @@ const DrawerMenu: FC<DrawerMenuI> = ({ isOpen, setIsOpen }) => {
       <Image
         src={movieTesterLight.src}
         alt='logo'
+        aria-hidden='true'
         width={65}
         height={65}
         style={{
@@ -47,21 +47,7 @@ const DrawerMenu: FC<DrawerMenuI> = ({ isOpen, setIsOpen }) => {
       <ListMenuItems
         handleOpenLoginDemoModal={handleOpenLoginDemoModal}
         setIsOpen={setIsOpen}
-      />
-      <div className='mobile-navbar-social-networks-container'>
-        {[]?.map((item, index) => (
-          <div key={index}>
-            <CustomRemoteSVG
-              className='mobile-navbar-social-networks-item'
-              fill='#FFF'
-              stroke='#FFF'
-              width='24px'
-              height='24px'
-              url={""}
-            />
-          </div>
-        ))}
-      </div>
+      />   
       <div className='mobile-drawer-separator' />
       <div className='flex flex-row gap-4 items-center'>
         <span

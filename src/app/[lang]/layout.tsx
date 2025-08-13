@@ -4,7 +4,7 @@ import { LayoutTransition } from "./layoutTransition";
 import PublicLayoutWrapper from "@/_components/public/PublicLayoutWrapper";
 
 export const metadata: Metadata = {
-  title: "Movie Tester",
+  title: "Inicio | Movie Tester",
   description: "Web hecha con fines de desafio",
   icons: {
     icon: "/favicon.ico",

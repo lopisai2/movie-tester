@@ -41,4 +41,6 @@ const ScrollToTopButton: FC = () => {
   );
 };
 
+ScrollToTopButton.displayName = "ScrollToTopButton";
+
 export default ScrollToTopButton;

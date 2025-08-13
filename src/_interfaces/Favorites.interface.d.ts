@@ -5,4 +5,5 @@ export interface CustomFavoritesInterface {
 export interface CustomFavoritesState {
   store: CustomFavoritesInterface
   addRemoveFavorites: (movieId: string) => void;
+  hydrateFavorites: () => string[];
 }

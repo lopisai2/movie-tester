@@ -9,18 +9,23 @@ const MovieDetail: FC<{
   movieData: MovieResultI | null;
 }> = ({ movieData }) => {
   return (
-    <div className={`public-section-container ${styles.movieDetalContainer}`}>
+    <article
+      aria-labelledby='movie-detail-title'
+      className={`public-section-container ${styles.movieDetalContainer}`}
+    >
       {movieData?.Poster && movieData.Poster !== "N/A" && (
         <Image
           width={300}
           height={400}
           src={movieData?.Poster}
           alt={movieData?.Title}
+          aria-label='none'
         />
       )}
       <div className={styles.movieDetailInfo}>
-        <div className={styles.movieDetailTitle}>
+        <header className={styles.movieDetailTitle}>
           <h1
+            id='movie-detail-title'
             style={{
               marginBottom: 0,
             }}
@@ -32,45 +37,62 @@ const MovieDetail: FC<{
             width={40}
             height={40}
           />
-        </div>
+        </header>
         <p>{movieData?.Plot}</p>
-        <h2
-          style={{
-            marginTop: 24,
-          }}
-        >
-          Datos tecnicos
-        </h2>
-        <div className='flex flex-row gap-2'>
-          <span>Clasificación: </span>
-          <p>{movieData?.imdbRating}/10</p>
-        </div>
-        <div className='flex flex-row gap-2'>
-          <span>Año: </span>
-          <p>{movieData?.Released}</p>
-        </div>
-        <div className='flex flex-row gap-2'>
-          <span>Duración: </span>
-          <p>{movieData?.Runtime}</p>
-        </div>
-        <div className='flex flex-row gap-2'>
-          <span>Género: </span>
-          <p>{movieData?.Genre}</p>
-        </div>
-        <div className='flex flex-row gap-2'>
-          <span>Director: </span>
-          <p>{movieData?.Director}</p>
-        </div>
-        <div className='flex flex-row gap-2'>
-          <span>Escritor: </span>
-          <p>{movieData?.Writer}</p>
-        </div>
-        <div className='flex flex-row gap-2'>
-          <span>Actores: </span>
-          <p>{movieData?.Actors}</p>
-        </div>
+        <section aria-labelledby='technical-data-title'>
+          <h2
+            id='technical-data-title'
+            style={{
+              marginTop: 24,
+            }}
+          >
+            Datos tecnicos
+          </h2>
+          <dl>
+            <div className='flex flex-row gap-2'>
+              <dt className='text-black dark:text-white'>Clasificación: </dt>
+              <dd className='text-black dark:text-white'>
+                {movieData?.imdbRating}/10
+              </dd>
+            </div>
+            <div className='flex flex-row gap-2'>
+              <dt className='text-black dark:text-white'>Año: </dt>
+              <dd className='text-black dark:text-white'>
+                {movieData?.Released}
+              </dd>
+            </div>
+            <div className='flex flex-row gap-2'>
+              <dt className='text-black dark:text-white'>Duración: </dt>
+              <dd className='text-black dark:text-white'>
+                {movieData?.Runtime}
+              </dd>
+            </div>
+            <div className='flex flex-row gap-2'>
+              <dt className='text-black dark:text-white'>Género: </dt>
+              <dd className='text-black dark:text-white'>{movieData?.Genre}</dd>
+            </div>
+            <div className='flex flex-row gap-2'>
+              <dt className='text-black dark:text-white'>Director: </dt>
+              <dd className='text-black dark:text-white'>
+                {movieData?.Director}
+              </dd>
+            </div>
+            <div className='flex flex-row gap-2'>
+              <dt className='text-black dark:text-white'>Escritor: </dt>
+              <dd className='text-black dark:text-white'>
+                {movieData?.Writer}
+              </dd>
+            </div>
+            <div className='flex flex-row gap-2'>
+              <dt className='text-black dark:text-white'>Actores: </dt>
+              <dd className='text-black dark:text-white'>
+                {movieData?.Actors}
+              </dd>
+            </div>
+          </dl>
+        </section>
       </div>
-    </div>
+    </article>
   );
 };
 

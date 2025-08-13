@@ -11,15 +11,19 @@ const ListMenuItems = ({
   handleOpenLoginDemoModal: (modalCode: "loginDrawer" | "demoDrawer") => void;
 }) => {
   const { handleRedirectTo, pathWithoutLocale } = useRedirectTo();
-    const handleSelectItem = (redirectTo: string) => {
+  const handleSelectItem = (redirectTo: string) => {
     handleRedirectTo(redirectTo);
     setIsOpen(false);
   };
 
   return (
-    <ul className='mobile-menu-list-items-wrapper'>
+    <ul
+      aria-label='mobile navbar'
+      role='list'
+      className='mobile-menu-list-items-wrapper'
+    >
       {menuItems?.map((item, index) => (
-        <li key={index}>
+        <li role='listitem' key={index}>
           {
             <CustomBasicButton
               icon={item.icon}
@@ -34,7 +38,7 @@ const ListMenuItems = ({
         </li>
       ))}
       {secondMenuItems?.map((item, index) => (
-        <li key={index}>
+        <li role='listitem' key={index}>
           {
             <CustomBasicButton
               icon={item.icon}
