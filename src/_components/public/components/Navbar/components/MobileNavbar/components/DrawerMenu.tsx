@@ -31,7 +31,8 @@ const DrawerMenu: FC<DrawerMenuI> = ({ isOpen, setIsOpen }) => {
       placement='left'
       open={isOpen}
       onClose={() => setIsOpen(false)}
-      closeIcon={<CloseIcon  />}
+      width={275}
+      closeIcon={<CloseIcon />}
     >
       <Image
         src={movieTesterLight.src}
@@ -62,8 +63,14 @@ const DrawerMenu: FC<DrawerMenuI> = ({ isOpen, setIsOpen }) => {
         ))}
       </div>
       <div className='mobile-drawer-separator' />
-      <div className="flex flex-row gap-2 items-center">
-        <span>Tema:</span>
+      <div className='flex flex-row gap-4 items-center'>
+        <span
+          style={{
+            color: "#fff",
+          }}
+        >
+          Tema:
+        </span>
         <ThemeToggle />
       </div>
     </CustomDrawer>

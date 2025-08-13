@@ -1,6 +1,6 @@
 .movieDetalContainer {    
     display: flex;
-    flex-direction: row;    
+    flex-direction: row !important;
     gap: 32px;
 }
 
@@ -22,7 +22,7 @@
 @media screen and (max-width: 1024px) {
     .movieDetalContainer {
         width: 100%;
-        flex-direction: column;
+        flex-direction: column !important;
         gap: 24px;
     }
 

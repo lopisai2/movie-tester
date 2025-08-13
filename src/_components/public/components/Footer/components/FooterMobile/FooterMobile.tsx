@@ -16,36 +16,26 @@ const FooterMobile: FC = ({}) => {
 
   const CloseIcon = () => <ArrowDownIcon2 className='rotate-180' />;
 
-  const order = [0, 3, 1, 4, 2];
-
-  const acccordionItems =
-    footerData
-      .map((item, index) => ({
-        label: item.title,
-        content: (
-          <ul>
-            {item.links?.map((subitem, subindex) => (
-              <li
-                onClick={() =>
-                  handleFooterLinkClick({
-                    url: "/",
-                    code: "",
-                  })
-                }
-                key={subindex}
-              >
-                {subitem.label}
-              </li>
-            ))}
-          </ul>
-        ),
-        originalIndex: index,
-      }))
-      .sort(
-        (a, b) =>
-          order.indexOf(a.originalIndex) - order.indexOf(b.originalIndex)
-      )
-      .map((item) => ({ label: item.label, content: item.content })) ?? [];
+  const acccordionItems = footerData.map((item) => ({
+    label: item.title,
+    content: (
+      <ul>
+        {item.links?.map((subitem, subindex) => (
+          <li
+            onClick={() =>
+              handleFooterLinkClick({
+                url: "/",
+                code: "",
+              })
+            }
+            key={subindex}
+          >
+            {subitem.label}
+          </li>
+        ))}
+      </ul>
+    ),
+  }));
 
   return (
     <section className='footer-container footer-mobile'>

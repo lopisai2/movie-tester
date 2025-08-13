@@ -2,12 +2,13 @@
 import styles from "./styles.module.css";
 import { useSearch } from "./_hooks/useSearch";
 import SearchFilters from "./_components/SearchFilters";
-import SearchResults from "./_components/SearchResults";
+import MoviesResultGrid from "@/_components/public/components/MoviesResultGrid/MoviesResultGrid";
 
 const SearchPageClient = () => {
   const {
     query,
     moviesData,
+    hasNextPage,
     isLoading,
     error,
     sentinelRef,
@@ -31,12 +32,15 @@ const SearchPageClient = () => {
             movieFilters={movieFilters}
             handleUpdateFilters={handleUpdateFilters}
           />
-          <SearchResults
-            error={error}
-            isLoading={isLoading}
-            sentinelRef={sentinelRef}
-            moviesData={moviesData}
-          />
+          <div className={styles.searchPageMoviesResults}>
+            <MoviesResultGrid
+              error={error}
+              hasNextPage={hasNextPage}
+              isLoading={isLoading}
+              sentinelRef={sentinelRef}
+              moviesData={moviesData?.pages.flatMap((page) => page?.Search)}
+            />
+          </div>
         </div>
       </div>
     </section>

@@ -27,7 +27,7 @@ const SearchBar: FC = () => {
         <Input
           type='text'
           placeholder='Buscar Avengers, Batman...'
-          className={`${styles.searchInput} bg-white dark:bg-[#252525]`}
+          className={`${styles.searchInput} bg-white dark:bg-[#252525] text-black dark:text-white border-zinc-400`}
           value={movieTerm}
           onChange={(e) => setMovieTerm(e.target.value)}
         />

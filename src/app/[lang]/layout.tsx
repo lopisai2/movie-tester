@@ -41,8 +41,23 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ id: string; lang: string }>;
 }>) {
+  /**
+   * Permite establecer el tema de la aplicación inmediatamente después de entregar el html principal
+   */
+  const initialThemeScript = `
+    (function() {
+      const theme = localStorage.getItem('themeMode');
+      if (theme) {
+        document.documentElement.classList.add(theme);
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
+      }
+    })();
+  `;
   return (
     <html lang='es' suppressHydrationWarning>
+      <script dangerouslySetInnerHTML={{ __html: initialThemeScript }} />
       <body className={`antialiased public-container`}>
         <PublicLayoutWrapper params={await params}>
           <LayoutTransition

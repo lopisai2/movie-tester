@@ -11,10 +11,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/_components/ui/dropdown-menu";
+import { useThemeStore } from "@/_store/theme/theme";
 
-export const ThemeToggle: React.FC = () => {
-  const { setTheme } = useTheme();
+export const ThemeToggle: React.FC = () => {  
+  const changeThemeMode = useThemeStore((state) => state.changeThemeMode);
 
+  const handleChangeTheme = (theme: "light" | "dark") => {
+    
+    changeThemeMode(theme);
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,11 +33,11 @@ export const ThemeToggle: React.FC = () => {
           <span className='sr-only'>Cambiar tema</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className="z-[1500]">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+      <DropdownMenuContent align='end' className='z-[1500]'>
+        <DropdownMenuItem onClick={() => handleChangeTheme("light")}>
           Claro
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => handleChangeTheme("dark")}>
           Oscuro
         </DropdownMenuItem>
       </DropdownMenuContent>

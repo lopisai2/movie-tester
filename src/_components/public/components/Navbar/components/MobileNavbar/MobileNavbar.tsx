@@ -75,7 +75,7 @@ const MobileNavbar: FC<{
             aria-label='hamburger-menu'
             onClick={() => setShowSearchBar(true)}
             className='public-standard-btn-icon'
-            icon={<SearchIcon />}
+            icon={<SearchIcon color="#fff" />}
           />
           <CustomBasicButton
             aria-label='hamburger-menu'

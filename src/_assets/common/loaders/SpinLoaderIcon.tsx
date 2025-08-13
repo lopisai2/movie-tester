@@ -5,7 +5,7 @@ export const SpinLoaderIcon: FC<SVGCommonProps> = ({
   className,
   width = "24px",
   height = "24px",
-  masterFill = "var(--color-primary)",
+  masterFill = "#000",
 }) => {
   return (
     <svg

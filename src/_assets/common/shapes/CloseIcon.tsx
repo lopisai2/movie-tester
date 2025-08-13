@@ -6,7 +6,7 @@ export const CloseIcon: FC<SVGCommonProps> = ({
   width = "30px",
   height = "30px",
   masterFill = "none",
-  fill = "#324467",
+  fill = "#fff",
 }) => {
   //   const svgId = useId();
   return (

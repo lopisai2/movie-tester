@@ -34,8 +34,8 @@ export const useSearch = () => {
     const {
         data: moviesData,
         fetchNextPage,
-        hasNextPage,
-        isLoading,
+        hasNextPage,        
+        isFetching,
         error,
     } = useInfiniteQuery({
         queryKey: ["search", query, year, type],
@@ -59,14 +59,15 @@ export const useSearch = () => {
 
     const { sentinelRef } = useCustomBasicList<MovieResultI>({
         hasMore: hasNextPage,
-        loading: isLoading,
+        loading: isFetching,
         loadMoreData: fetchNextPage,
     });
     return {
         query,
         movieFilters,
         moviesData,
-        isLoading,
+        isLoading: isFetching,
+        hasNextPage,
         error,
         sentinelRef,
         handleUpdateFilters,
