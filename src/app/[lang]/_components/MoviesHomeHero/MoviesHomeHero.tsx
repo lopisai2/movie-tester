@@ -10,7 +10,7 @@ export const MoviesHomeHero: FC<{
 }> = ({ movies, featuredMovies }) => {
   return (
     <div
-      className={`${styles.movieHomeCarouselSection} public-section-container`}
+      className={`public-section-container ${styles.movieHomeCarouselSection}`}
     >
       <MoviesHomeHeroCarousel movies={movies} />
       <MoviesHomeHeroFeatures featuredMovies={featuredMovies} />

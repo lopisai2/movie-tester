@@ -3,6 +3,16 @@
     justify-content: flex-start;
 }
 
+.searchFiltersSelect{
+    width: 100%;
+}
+
+.searchFiltersSelect>span,
+.searchFiltersSelectItems span {
+    font-weight: 400;
+    font-size: 14px;
+}
+
 .searchPageMovies {
     display: flex;
     width: 100%;
@@ -16,61 +26,6 @@
 .searchPageMoviesResults {
     width: 75%;
 }
-
-.searchPageMoviesResultsList {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 24px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    height: 700px;
-}
-
-.searchPageMoviesResultsItem {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.searchPageMoviesResultsItemPoster {
-    min-width: 200px;
-    width: 100%;
-    min-height: 300px;
-    max-height: 300px;
-    object-fit: contain;
-    position: relative;
-}
-
-.searchPageMoviesSkeleton {
-    height: 300px;
-    width: 200px;
-    max-width: 400px;
-    border-radius: 14px;
-}
-
-.searchPageMoviesNoResults {
-    padding-top: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    grid-column: 1/5;
-}
-
-@media screen and (max-width: 1280px) {
-    .searchPageMoviesResultsList {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .searchPageMoviesNoResults {
-        grid-column: 1/4;
-    }
-
-}
-
 
 @media screen and (max-width: 1024px) {
     .searchPageMoviesResults {
@@ -96,32 +51,4 @@
         grid-column: auto;
         width: 100%;
     }
-
-    .searchPageMoviesNoResults {
-        grid-column: auto;
-    }
-
-    .searchPageMoviesResultsList {
-        margin-top: 24px;
-        grid-template-columns: 1fr;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: auto;
-    }
-
-    .searchPageMoviesResultsItemPoster {
-        min-width: 100%;
-        min-height: 300px;
-        max-height: 300px;
-        object-fit: contain;
-        position: relative;
-    }
-
-    .searchPageMoviesSkeleton {
-        width: 100%;
-        height: 350px;
-    }
-
 }

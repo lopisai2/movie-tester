@@ -50,13 +50,10 @@ const SearchFilters: FC<SearchFiltersI> = ({
           onValueChange={(value) => handleUpdateFilters({ type: value })}
           defaultValue={movieFilters.type}
         >
-          <SelectTrigger className='w-full'>
-            <SelectValue
-              className='text-[14px]'
-              placeholder='Seleccionar un tipo'
-            />
+          <SelectTrigger className={styles.searchFiltersSelect}>
+            <SelectValue placeholder='Seleccionar un tipo' />
           </SelectTrigger>
-          <SelectContent className='text-[14px]'>
+          <SelectContent className={styles.searchFiltersSelectItems}>
             <SelectItem value='all'>Todos</SelectItem>
             <SelectItem value='movie'>Peliculas</SelectItem>
             <SelectItem value='series'>Series</SelectItem>
@@ -70,7 +67,7 @@ const SearchFilters: FC<SearchFiltersI> = ({
           placeholder='Año'
           defaultValue={movieFilters.year}
           max={4}
-          className='text-black dark:text-white'
+          className='text-black dark:text-white selection:bg-[var(--primary-color)]'
           onChange={(e) => handleValidateYearInput(e.target.value)}
         />
         {yearInputError && (

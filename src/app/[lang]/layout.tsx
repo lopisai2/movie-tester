@@ -48,8 +48,7 @@ export default async function RootLayout({
     (function() {
       const theme = localStorage.getItem('themeMode');
       if (theme) {
-        document.documentElement.classList.add(theme);        
-        console.log(theme);
+        document.documentElement.classList.add(theme);                
       } else {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.classList.add(prefersDark ? 'dark' : 'light');

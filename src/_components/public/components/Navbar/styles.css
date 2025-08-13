@@ -31,7 +31,7 @@
 
 .navbar-container-items-buttons {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
 
 }

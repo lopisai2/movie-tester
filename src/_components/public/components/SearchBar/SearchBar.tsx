@@ -1,7 +1,7 @@
 "use client";
 import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { Input } from "@/_components/ui/input";
 import { SearchIcon } from "lucide-react";
@@ -9,7 +9,7 @@ import { SearchIcon } from "lucide-react";
 const SearchBar: FC = () => {
   const searchParams = useSearchParams();
   const [searchInputError, setSearchInputError] = useState("");
-  const [movieTerm, setMovieTerm] = useState(searchParams.get("q") || "");
+  const [movieTerm, setMovieTerm] = useState("");
   const router = useRouter();
 
   const handleSearchMovie = (e: React.FormEvent) => {
@@ -20,18 +20,26 @@ const SearchBar: FC = () => {
     setSearchInputError("");
     router.push(`/search?q=${encodeURIComponent(movieTerm)}`);
   };
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) setMovieTerm(q);
+  }, [searchParams]);
+
   return (
     <form
       id='search-bar'
-      name='search-bar'      
-      className={`${styles.searcBarForm} ${searchInputError ? 'pt-8' : ''}`}
+      name='search-bar'
+      className={`${styles.searcBarForm} ${
+        searchInputError ? "max-lg:pt-12 pt-2" : ""
+      }`}
       onSubmit={handleSearchMovie}
     >
       <div className={styles.searchInputContainer}>
         <Input
           type='text'
           placeholder='Buscar Avengers, Batman...'
-          className={`${styles.searchInput} bg-white dark:bg-[#252525] text-black dark:text-white border-zinc-400`}
+          className={`${styles.searchInput} bg-white dark:bg-[#252525] text-black dark:text-white border-zinc-400 selection:bg-[var(--primary-color)]`}
           value={movieTerm}
           onChange={(e) => setMovieTerm(e.target.value)}
         />
@@ -40,7 +48,8 @@ const SearchBar: FC = () => {
         </CustomBasicButton>
       </div>
       {searchInputError && (
-        <span         
+        <span
+          className='max-lg:mt-3'
           style={{
             color: "var(--negative)",
             fontWeight: 400,
