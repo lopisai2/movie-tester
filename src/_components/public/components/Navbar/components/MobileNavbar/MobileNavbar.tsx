@@ -6,14 +6,13 @@ import DrawerMenu from "./components/DrawerMenu";
 import useRedirectTo from "@/_hooks/useRedirectTo";
 import movieTesterLight from "@/_assets/logos/movieTesterLight.png";
 import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
-import { StrapiFinalDataPage } from "@/_interfaces/StrapiData.interface";
 import HamburgerMenuIcon from "@/_assets/common/shapes/HamburgerMenuIcon";
 import Image from "next/image";
 import { SearchIcon } from "lucide-react";
 import SearchBar from "../../../SearchBar/SearchBar";
 
 const MobileNavbar: FC<{
-  navbarData: StrapiFinalDataPage | null;
+  navbarData: null;
 }> = ({}) => {
   const { handleRedirectTo } = useRedirectTo();
   const [showDrawerItems, setShowDrawerItems] = useState(false);

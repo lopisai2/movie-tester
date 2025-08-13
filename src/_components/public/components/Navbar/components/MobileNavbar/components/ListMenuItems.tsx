@@ -1,8 +1,7 @@
 "use client";
 import useRedirectTo from "@/_hooks/useRedirectTo";
 import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
-import CustomRemoteSVG from "@/_UI/Basic/CustomRemoteSVG/CustomRemoteSVG";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { menuItems, secondMenuItems } from "../constants/mobileMenuData";
 
 const ListMenuItems = ({
@@ -12,11 +11,7 @@ const ListMenuItems = ({
   handleOpenLoginDemoModal: (modalCode: "loginDrawer" | "demoDrawer") => void;
 }) => {
   const { handleRedirectTo, pathWithoutLocale } = useRedirectTo();
-  const [selectedItem, setSelectedItem] = useState<string | null>(
-    pathWithoutLocale
-  );
-
-  const handleSelectItem = (redirectTo: string) => {
+    const handleSelectItem = (redirectTo: string) => {
     handleRedirectTo(redirectTo);
     setIsOpen(false);
   };
@@ -30,10 +25,7 @@ const ListMenuItems = ({
               icon={item.icon}
               onClick={() => handleSelectItem(item.url)}
               className={`mobile-menu-list-items-item-button ${
-                item.url === pathWithoutLocale &&
-                pathWithoutLocale === selectedItem
-                  ? "selected"
-                  : ""
+                item.url === pathWithoutLocale ? "selected" : ""
               }`}
             >
               {item.label}
@@ -45,9 +37,7 @@ const ListMenuItems = ({
         <li key={index}>
           {
             <CustomBasicButton
-              icon={
-                item.icon
-              }
+              icon={item.icon}
               onClick={() => handleSelectItem("/")}
               className={`mobile-menu-list-items-item-button ${
                 item.url === pathWithoutLocale ? "selected" : ""

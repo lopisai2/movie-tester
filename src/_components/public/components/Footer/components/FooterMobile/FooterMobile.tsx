@@ -19,9 +19,10 @@ const FooterMobile: FC = ({}) => {
   const acccordionItems = footerData.map((item) => ({
     label: item.title,
     content: (
-      <ul>
+      <ul role='list'>
         {item.links?.map((subitem, subindex) => (
           <li
+            role='listitem'
             onClick={() =>
               handleFooterLinkClick({
                 url: "/",
@@ -39,14 +40,14 @@ const FooterMobile: FC = ({}) => {
 
   return (
     <section className='footer-container footer-mobile'>
-      <div className='footer-mobile-main-list'>
+      <article aria-label='Footer Menus' className='footer-mobile-main-list'>
         <CustomBasicAccordion
           CloseIcon={CloseIcon}
           Icon={ArrowDownIcon2}
           items={acccordionItems}
           className='footer-main-list-sublists-item'
         />
-      </div>
+      </article>
       <div className='footer-mobile-main-list-sublists-item-contact-wrapper'>
         {[{}].map((item, index) => (
           <div key={index} className='footer-main-list-sublists-item-contact'>
