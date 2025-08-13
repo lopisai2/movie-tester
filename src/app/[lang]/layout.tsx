@@ -48,7 +48,8 @@ export default async function RootLayout({
     (function() {
       const theme = localStorage.getItem('themeMode');
       if (theme) {
-        document.documentElement.classList.add(theme);
+        document.documentElement.classList.add(theme);        
+        console.log(theme);
       } else {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
@@ -57,7 +58,12 @@ export default async function RootLayout({
   `;
   return (
     <html lang='es' suppressHydrationWarning>
-      <script dangerouslySetInnerHTML={{ __html: initialThemeScript }} />
+      <head>
+        <script          
+          id='initial-theme'
+          dangerouslySetInnerHTML={{ __html: initialThemeScript }}
+        />
+      </head>
       <body className={`antialiased public-container`}>
         <PublicLayoutWrapper params={await params}>
           <LayoutTransition

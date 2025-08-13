@@ -78,20 +78,26 @@
     }
 
     .searchPageMovies {
+        flex-direction: column;
+
+    }
+
+    .searchPageMovies {
         grid-template-columns: 1fr;
         gap: 24px;
     }
 
     .searchPageMoviesFilters {
         grid-column: auto;
-        max-width: 100%;
+        width: 100%;
     }
 
     .searchPageMoviesResults {
         grid-column: auto;
+        width: 100%;
     }
 
-    .searchPageMoviesNoResults{
+    .searchPageMoviesNoResults {
         grid-column: auto;
     }
 

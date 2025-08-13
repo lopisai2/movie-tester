@@ -8,19 +8,23 @@ import { SearchIcon } from "lucide-react";
 
 const SearchBar: FC = () => {
   const searchParams = useSearchParams();
+  const [searchInputError, setSearchInputError] = useState("");
   const [movieTerm, setMovieTerm] = useState(searchParams.get("q") || "");
   const router = useRouter();
 
   const handleSearchMovie = (e: React.FormEvent) => {
     e.preventDefault();
     if (!movieTerm || !movieTerm.trim()) return;
+    if (movieTerm.length < 3)
+      return setSearchInputError("La busqueda debe tener al menos 3 letras");
+    setSearchInputError("");
     router.push(`/search?q=${encodeURIComponent(movieTerm)}`);
   };
   return (
     <form
       id='search-bar'
-      name='search-bar'
-      className={styles.searcBarForm}
+      name='search-bar'      
+      className={`${styles.searcBarForm} ${searchInputError ? 'pt-8' : ''}`}
       onSubmit={handleSearchMovie}
     >
       <div className={styles.searchInputContainer}>
@@ -35,6 +39,17 @@ const SearchBar: FC = () => {
           <SearchIcon />
         </CustomBasicButton>
       </div>
+      {searchInputError && (
+        <span         
+          style={{
+            color: "var(--negative)",
+            fontWeight: 400,
+            fontSize: 12,
+          }}
+        >
+          {searchInputError}
+        </span>
+      )}
     </form>
   );
 };

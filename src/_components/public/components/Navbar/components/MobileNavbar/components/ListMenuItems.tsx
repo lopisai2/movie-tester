@@ -27,15 +27,7 @@ const ListMenuItems = ({
         <li key={index}>
           {
             <CustomBasicButton
-              icon={
-                <CustomRemoteSVG
-                  width='24px'
-                  height='24px'
-                  fill='var(--white)'
-                  stroke='var(--white)'
-                  url={""}
-                />
-              }
+              icon={item.icon}
               onClick={() => handleSelectItem(item.url)}
               className={`mobile-menu-list-items-item-button ${
                 item.url === pathWithoutLocale &&
@@ -54,14 +46,7 @@ const ListMenuItems = ({
           {
             <CustomBasicButton
               icon={
-                <CustomRemoteSVG
-                  width='24px'
-                  height='24px'
-                  fill='var(--white)'
-                  stroke='var(--white)'
-                  secondaryFill='none'
-                  url={""}
-                />
+                item.icon
               }
               onClick={() => handleSelectItem("/")}
               className={`mobile-menu-list-items-item-button ${
