@@ -9,7 +9,7 @@ import CustomBasicButton from "@/_UI/Basic/CustomBasicButton/CustomBasicButton";
 import HamburgerMenuIcon from "@/_assets/common/shapes/HamburgerMenuIcon";
 import Image from "next/image";
 import { SearchIcon } from "lucide-react";
-import SearchBar from "../../../SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 const MobileNavbar: FC<{
   navbarData: null;

@@ -35,6 +35,7 @@ describe("addRemoveFavoritesThunk", () => {
     mockSet = jest.fn();
     mockGet = jest.fn<CustomFavoritesState, []>(() => ({
       store: { favorites: [] },
+      hydrateFavorites: jest.fn(),
       addRemoveFavorites: jest.fn(),
     }));
   });

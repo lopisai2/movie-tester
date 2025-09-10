@@ -1,4 +1,4 @@
-import MobileNavbar from "./components/MobileNavbar/MobileNavbar";
+import MobileNavbar from "../MobileNavbar/MobileNavbar";
 import Navbar from "./Navbar";
 import { FC } from "react";
 
